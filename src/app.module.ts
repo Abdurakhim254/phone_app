@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { RedisModule } from '@nestjs-modules/ioredis';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -24,10 +25,11 @@ import { RedisModule } from '@nestjs-modules/ioredis';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    RedisModule.forRoot({
-      type: 'single',
-      url: 'redis://localhost:6379',
-    }),
+    ProductsModule,
+    // RedisModule.forRoot({
+    //   type: 'single',
+    //   url: 'redis://localhost:6379',
+    // }),
   ],
 })
 export class AppModule {}

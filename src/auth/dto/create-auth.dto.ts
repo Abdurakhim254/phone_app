@@ -7,6 +7,7 @@ import {
   Min,
   IsBoolean,
   IsEnum,
+  Max,
 } from 'class-validator';
 
 export class CreateAuthDto {
@@ -24,7 +25,7 @@ export class CreateAuthDto {
   @IsStrongPassword()
   @MinLength(5)
   password: string;
-  @IsNumber()
-  @Min(7)
+  @IsString()
+  @MinLength(13)
   phone_number: string;
 }

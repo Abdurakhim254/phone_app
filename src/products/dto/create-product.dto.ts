@@ -1,0 +1,17 @@
+import { IsString, IsNumber, MinLength, Min } from 'class-validator';
+
+export class CreateProductDto {
+  @IsString()
+  memory: number;
+  @IsString()
+  @MinLength(5)
+  model: string;
+  @IsString()
+  @Min(24)
+  ram: number;
+  @IsString()
+  @MinLength(4)
+  year: string;
+  @IsNumber()
+  price: number;
+}

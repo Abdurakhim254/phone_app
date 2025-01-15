@@ -4,10 +4,14 @@ import { loginAuthdto } from './dto/login-dto';
 import { Repository } from 'typeorm';
 import { User } from 'src/user/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectRepository(User) private User: Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private User: Repository<User>,
+    private jwtservice: JwtService,
+  ) {}
   async create(createauthDto: CreateAuthDto) {
     const { email } = createauthDto;
     const result = await this.User.findOne({ where: { email } });
@@ -31,7 +35,9 @@ export class AuthService {
     if (!result) {
       return "Ro'yxatdan o'tishingiz kerak";
     }
-
-    return 'Login Muvaffaqiyatli ravishda yakunlandi';
+    const { role } = result;
+    const payload = { email, role };
+    const assessToken = await this.jwtservice.signAsync(payload);
+    return { assessToken };
   }
 }
