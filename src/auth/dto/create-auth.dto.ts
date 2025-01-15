@@ -6,12 +6,13 @@ import {
   IsNumber,
   Min,
   IsBoolean,
+  IsEnum,
 } from 'class-validator';
 
 export class CreateAuthDto {
   @IsString()
   @MinLength(3)
-  name: String;
+  name: string;
   @IsString()
   @MinLength(5)
   familya: string;
@@ -25,9 +26,5 @@ export class CreateAuthDto {
   password: string;
   @IsNumber()
   @Min(7)
-  phone_number: number;
-  @IsString()
-  role: string;
-  @IsBoolean()
-  isactive: boolean;
+  phone_number: string;
 }

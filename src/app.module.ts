@@ -3,10 +3,12 @@ import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { RedisModule } from '@nestjs-modules/ioredis';
 
 @Module({
   imports: [
     UserModule,
+    AuthModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
@@ -22,7 +24,10 @@ import { AuthModule } from './auth/auth.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    AuthModule,
+    RedisModule.forRoot({
+      type: 'single',
+      url: 'redis://localhost:6379',
+    }),
   ],
 })
 export class AppModule {}

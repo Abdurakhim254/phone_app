@@ -1,19 +1,17 @@
 services:
-  super-app:
-    build: .
-    ports:
-      - '5000:3000'
-    env_file:
-      - .env
-    depends_on:
-      - postgres
-    networks:
-      - postgres
+  # super-app:
+  #   build: .
+  #   ports:
+  #     - '5000:3000'
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - postgres
 
   postgres:
     image: postgres
     environment:
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=root
       - POSGRES_DB=postgres
       - POSTGRES_USER=postgres
     ports:
