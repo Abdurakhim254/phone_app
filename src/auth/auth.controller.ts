@@ -16,4 +16,9 @@ export class AuthController {
   register(@Body() loginauthdto: loginAuthdto) {
     return this.authService.loginservice(loginauthdto);
   }
+  @Post('refreshtoken')
+  refreshtokencon(@Body() accessToken) {
+    const token = accessToken.assessToken;
+    return this.authService.refreshtokenservice(token);
+  }
 }

@@ -23,7 +23,7 @@ import { ProductsModule } from './products/products.module';
       database: 'postgres',
       entities: [],
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
     }),
     ProductsModule,
     // RedisModule.forRoot({

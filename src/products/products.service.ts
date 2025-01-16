@@ -11,7 +11,8 @@ export class ProductsService {
     @InjectRepository(Product) private Product: Repository<Product>,
   ) {}
   async create(createProductDto: CreateProductDto) {
-    this.Product.create(createProductDto);
+    const product = await this.Product.create(createProductDto);
+    await this.Product.save(product);
     return 'Product yaratildi';
   }
 
@@ -34,7 +35,7 @@ export class ProductsService {
   async update(id: number, updateProductDto: UpdateProductDto) {
     const result = await this.Product.findOne({ where: { id } });
     if (result) {
-      await this.Product.update(id, updateProductDto);
+      await this.Product.update({ id }, updateProductDto);
       return 'Product yangilandi';
     }
     return 'Yangilanadigan Product topilmadi';

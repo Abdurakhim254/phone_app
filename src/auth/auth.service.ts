@@ -37,7 +37,16 @@ export class AuthService {
     }
     const { role } = result;
     const payload = { email, role };
+    await this.User.update({ email }, { isactive: true });
     const assessToken = await this.jwtservice.signAsync(payload);
     return { assessToken };
+  }
+
+  async refreshtokenservice(token: string) {
+    const data = await this.jwtservice.verify(token);
+    const { email, role } = data;
+    const payload = { email, role };
+    const accessToken = await this.jwtservice.signAsync(payload);
+    return { accessToken, refreshtoken: token };
   }
 }

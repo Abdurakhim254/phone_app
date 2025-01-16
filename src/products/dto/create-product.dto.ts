@@ -1,13 +1,13 @@
 import { IsString, IsNumber, MinLength, Min } from 'class-validator';
 
 export class CreateProductDto {
-  @IsString()
+  @IsNumber()
   memory: number;
   @IsString()
   @MinLength(5)
   model: string;
-  @IsString()
-  @Min(24)
+  @IsNumber()
+  @Min(4)
   ram: number;
   @IsString()
   @MinLength(4)

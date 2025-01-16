@@ -1,4 +1,4 @@
-import { Role } from 'src/config/roles';
+import { Role } from 'src/config/enums/roles';
 import { Product } from 'src/products/entities/product.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
@@ -16,7 +16,7 @@ export class User {
   @Column({ type: 'varchar', length: 50, unique: true })
   email: string;
 
-  @Column({ type: 'varchar', length: 50, unique: true })
+  @Column({ type: 'varchar', length: 50 })
   password: string;
 
   @Column({ type: 'varchar', length: 25, unique: true })

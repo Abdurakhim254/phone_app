@@ -7,13 +7,14 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-  // constructor(@InjectRepository(User) private usermodel: Repository<User>) {}
+  constructor(@InjectRepository(User) private usermodel: Repository<User>) {}
   create(createUserDto: CreateUserDto) {
     return 'This action adds a new user';
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    const result = await this.usermodel.find();
+    return result;
   }
 
   findOne(id: number) {
