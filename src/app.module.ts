@@ -11,6 +11,7 @@ import { OrdersModule } from './orders/orders.module';
   imports: [
     UserModule,
     AuthModule,
+    ProductsModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
@@ -24,9 +25,8 @@ import { OrdersModule } from './orders/orders.module';
       database: 'postgres',
       entities: [],
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
     }),
-    ProductsModule,
     OrdersModule,
     // RedisModule.forRoot({
     //   type: 'single',

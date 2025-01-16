@@ -1,21 +1,21 @@
 import { User } from 'src/user/entities/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, DataSource, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar', length: 25, nullable: true })
+  @Column({ type: 'varchar', length: 25 ,})
   model: string;
 
-  @Column({ type: 'int', nullable: true })
+  @Column({ type: 'int' })
   memory: number;
 
-  @Column({ type: 'int', nullable: true })
+  @Column({ type: 'int' })
   ram: number;
 
-  @Column({ type: 'varchar', length: 60, nullable: true })
+  @Column({ type: 'varchar', length: 60})
   year: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })

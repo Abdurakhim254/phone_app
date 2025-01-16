@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req: Request = context.switchToHttp().getRequest();
     const [type, token] = req.headers.authorization.split(' ');
-    const roles: string[] = ['admin', 'superadmin'];
+    const roles: string[] = ['ADMIN', 'superAdmin'];
     if (type === 'Bearer' && token) {
       const data = await this.jwtservice.decode(token);
       if (roles.includes(data.role)) {
