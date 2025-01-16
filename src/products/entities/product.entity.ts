@@ -6,19 +6,19 @@ export class Product {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar', length: 25, nullable: false })
+  @Column({ type: 'varchar', length: 25, nullable: true })
   model: string;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'int', nullable: true })
   memory: number;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'int', nullable: true })
   ram: number;
 
-  @Column({ type: 'varchar', length: 5, nullable: false })
+  @Column({ type: 'varchar', length: 60, nullable: true })
   year: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
   price: number;
 
   @ManyToOne(() => User, (user) => user.products, { onDelete: 'CASCADE' })

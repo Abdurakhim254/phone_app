@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { RedisModule } from '@nestjs-modules/ioredis';
 import { ProductsModule } from './products/products.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -23,9 +24,10 @@ import { ProductsModule } from './products/products.module';
       database: 'postgres',
       entities: [],
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: true,
     }),
     ProductsModule,
+    OrdersModule,
     // RedisModule.forRoot({
     //   type: 'single',
     //   url: 'redis://localhost:6379',
