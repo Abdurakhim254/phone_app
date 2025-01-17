@@ -1,12 +1,20 @@
+import { Order } from 'src/orders/entities/order.entity';
 import { User } from 'src/user/entities/user.entity';
-import { Column, DataSource, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  DataSource,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar', length: 25 ,})
+  @Column({ type: 'varchar', length: 25 })
   model: string;
 
   @Column({ type: 'int' })
@@ -15,7 +23,7 @@ export class Product {
   @Column({ type: 'int' })
   ram: number;
 
-  @Column({ type: 'varchar', length: 60})
+  @Column({ type: 'varchar', length: 60 })
   year: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
@@ -23,4 +31,6 @@ export class Product {
 
   @ManyToOne(() => User, (user) => user.products, { onDelete: 'CASCADE' })
   user: User;
+  @OneToMany(() => Order, (order) => order.product)
+  orders: Order[];
 }
