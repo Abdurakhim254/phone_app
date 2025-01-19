@@ -11,7 +11,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('Mini auth CRUD')
-    .setDescription('The Auth Api description')
+    .setDescription('The Phone App Api description')
     .setVersion('1.0')
     .addTag('Auth')
     .build();

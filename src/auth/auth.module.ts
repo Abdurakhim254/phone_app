@@ -4,11 +4,10 @@ import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from 'src/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/user/entities/user.entity';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
     JwtModule.register({
       global: true,
       secret: 'qwer12345',
@@ -18,6 +17,6 @@ import { User } from 'src/user/entities/user.entity';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, PrismaService],
 })
 export class AuthModule {}

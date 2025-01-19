@@ -1,23 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { loginAuthdto } from './dto/login-dto';
-import { Repository } from 'typeorm';
-import { User } from 'src/user/entities/user.entity';
-import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User) private User: Repository<User>,
+    private readonly PrismaService: PrismaService,
     private jwtservice: JwtService,
   ) {}
-  async create(createauthDto: CreateAuthDto) {
+  async create(createauthDto: Prisma.UserCreateInput) {
     const { email } = createauthDto;
-    const result = await this.User.findOne({ where: { email } });
+    const result = await this.PrismaService.user.findUnique({
+      where: { email },
+    });
     if (!result) {
-      const user = await this.User.create(createauthDto);
-      await this.User.save(user);
+      await this.PrismaService.user.create({ data: createauthDto });
       return "Ro'yxatdan muvaffaqiyatli o'tdingiz";
     }
     return "Foydalanuvchi allaqachon ro'yxatdan o'tgan";
@@ -25,7 +25,7 @@ export class AuthService {
 
   async loginservice(loginauthdto: loginAuthdto) {
     const { email, password } = loginauthdto;
-    const result = await this.User.findOne({
+    const result = await this.PrismaService.user.findUnique({
       where: {
         email,
         password,
@@ -37,7 +37,12 @@ export class AuthService {
     }
     const { role } = result;
     const payload = { email, role };
-    await this.User.update({ email }, { isactive: true });
+    await this.PrismaService.user.update({
+      where: { email },
+      data: {
+        isactive: true,
+      },
+    });
     const assessToken = await this.jwtservice.signAsync(payload);
     return { assessToken };
   }

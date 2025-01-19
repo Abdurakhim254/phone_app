@@ -6,32 +6,19 @@ import { AuthModule } from './auth/auth.module';
 import { RedisModule } from '@nestjs-modules/ioredis';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [
     UserModule,
     AuthModule,
     ProductsModule,
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-      isGlobal: true,
-    }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'root',
-      database: 'postgres',
-      entities: [],
-      autoLoadEntities: true,
-      synchronize: false,
-    }),
     OrdersModule,
     // RedisModule.forRoot({
     //   type: 'single',
     //   url: 'redis://localhost:6379',
     // }),
   ],
+  providers: [PrismaService],
 })
 export class AppModule {}
