@@ -11,10 +11,6 @@ export class AuthGuard implements CanActivate {
     const roles: string[] = ['ADMIN', 'superAdmin'];
     if (type === 'Bearer' && token) {
       const data = await this.jwtservice.decode(token);
-      if (roles.includes(data.role)) {
-        return true;
-      }
-    }
-    return false;
+      return roles.includes(data.role)
   }
 }
